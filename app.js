@@ -1,8 +1,9 @@
 let friends = [];
 
+// Función para agregar amigos
 function addFriend() {
-  const input = document.getElementById("add-friend");
-  const friendName = input.value.trim();
+  let inputField = document.getElementById("add-friend");
+  let friendName = inputField.value.trim();
 
   if (friendName === "") {
     alert("Por favor, inserte un nombre.");
@@ -10,30 +11,47 @@ function addFriend() {
   }
 
   friends.push(friendName);
-  input.value = ""; // Limpiar el campo de entrada
+  inputField.value = "";
   updateFriendList();
 }
 
+// Función para actualizar la lista en la interfaz
 function updateFriendList() {
-  const list = document.getElementById("listaAmigos");
-  list.innerHTML = ""; // Limpiar la lista antes de actualizar
+  let friendList = document.getElementById("listaAmigos");
+  friendList.innerHTML = "";
 
   for (let friend of friends) {
-    const listItem = document.createElement("li");
+    let listItem = document.createElement("li");
     listItem.textContent = friend;
-    list.appendChild(listItem);
+    friendList.appendChild(listItem);
   }
 }
 
+// Función para limpiar la lista de amigos
+function clearFriendList() {
+  friends = [];
+  updateFriendList();
+}
+
+// Función para seleccionar un amigo al azar
 function sortearAmigo() {
   if (friends.length === 0) {
-    alert("No hay amigos para sortear.");
+    alert("No hay amigos en la lista para sortear.");
     return;
   }
 
-  const randomIndex = Math.floor(Math.random() * friends.length);
-  const chosenFriend = friends[randomIndex];
+  let randomIndex = Math.floor(Math.random() * friends.length);
+  let selectedFriend = friends[randomIndex];
 
-  const resultElement = document.getElementById("resultado");
-  resultElement.innerHTML = `<li>El amigo sorteado es: <strong>${chosenFriend}</strong></li>`;
+  let resultContainer = document.getElementById("resultado");
+  resultContainer.innerHTML = `<li>🎉 El amigo secreto es: <strong>${selectedFriend}</strong> 🎉</li>`;
 }
+
+// Agregar eventos a los botones
+document.getElementById("addFriendBtn").addEventListener("click", addFriend);
+document
+  .getElementById("clearListBtn")
+  .addEventListener("click", clearFriendList);
+document
+  .getElementById("drawFriendBtn")
+  .addEventListener("click", sortearAmigo);
