@@ -1,5 +1,19 @@
 let friends = [];
 
+function addFriend() {
+  const input = document.getElementById("add-friend");
+  const friendName = input.value.trim();
+
+  if (friendName === "") {
+    alert("Por favor, inserte un nombre.");
+    return;
+  }
+
+  friends.push(friendName);
+  input.value = ""; // Limpiar el campo de entrada
+  updateFriendList();
+}
+
 function updateFriendList() {
   const list = document.getElementById("listaAmigos");
   list.innerHTML = ""; // Limpiar la lista antes de actualizar
